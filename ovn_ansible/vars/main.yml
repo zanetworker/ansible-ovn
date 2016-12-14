@@ -1,0 +1,5 @@
+---
+# vars file for ovn_ansible
+
+newton_repo:
+  - "deb http://ubuntu-cloud.archive.canonical.com/ubuntu xenial-updates/newton main"

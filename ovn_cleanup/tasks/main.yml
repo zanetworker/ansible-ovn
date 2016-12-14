@@ -1,0 +1,36 @@
+---
+# tasks file for ovn_cleanupa
+
+
+- name: "Clean up ovn1"
+  template:
+    src: "cleanup_ovn1.sh.j2"
+    dest: "/home/vagrant/cleanup.sh"
+    owner: "vagrant"
+    group: "vagrant"
+    mode: "0755"
+  when: >
+    ansible_hostname == "ovn1"
+
+  
+- name: "Clean up ovn2"
+  template:
+    src: "cleanup_ovn2.sh.j2"
+    dest: "/home/vagrant/cleanup.sh"
+    owner: "vagrant"
+    group: "vagrant"
+    mode: "0755"
+  when: >
+    ansible_hostname == "ovn2"  
+  
+  
+- name: "Clean up ovn3"
+  template:
+    src: "cleanup_ovn3.sh.j2"
+    dest: "/home/vagrant/cleanup.sh"
+    owner: "vagrant"
+    group: "vagrant"
+    mode: "0755"
+  when: >
+    ansible_hostname == "ovn3"
+  

@@ -1,0 +1,7 @@
+
+- name: Installing OVN Stuff 
+  hosts: all
+  sudo: yes
+  roles:
+    - { role: ovn_ansible } 
+  

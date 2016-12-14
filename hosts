@@ -1,0 +1,19 @@
+
+[local]
+localhost ansible_python_interpreter=/usr/local/bin/python
+
+[all]
+ovn1 ansible_user=vagrant ansible_password=vagrant
+ovn2 ansible_user=vagrant ansible_password=vagrant
+ovn3 ansible_user=vagrant ansible_password=vagrant
+
+
+[one]
+ovn1 ansible_user=vagrant ansible_password=vagrant
+
+[two]
+ovn2 ansible_user=vagrant 
+
+[three]
+ovn3 ansible_user=vagrant
+

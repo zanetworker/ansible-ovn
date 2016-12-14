@@ -1,0 +1,8 @@
+
+- name: Cleaning UP OVN Stuff 
+  hosts: all
+  sudo: yes
+  roles:
+    - { role: ovn_cleanup  } 
+     
+  

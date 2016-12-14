@@ -1,0 +1,70 @@
+---
+# tasks file for ovn_ansible
+#
+- name: "Install Ubuntu Cloud Keyring package"
+  apt:
+    state: "present"
+    update_cache: "yes"
+    name: "ubuntu-cloud-keyring"
+
+
+- name: "Add Ubuntu CloudKeyring package"
+  apt_repository: 
+    repo: "{{ item }}" 
+    state: "present" 
+    update_cache: "yes"
+  with_items: newton_repo  
+
+- name: "Install OVS/OVN 2.6.0"
+  apt:
+    state: "present"
+    update_cache: "no"
+    name: "{{ item }}"
+  with_items:
+    - "ovn-common"
+    - "ovn-host"
+    - "openvswitch-common"
+    - "openvswitch-switch"  
+
+- name: "Install central OVN components" 
+  apt: 
+    state: "present" 
+    update_cache: "no" 
+    name: "ovn-central"
+  when: > 
+        ansible_hostname == "ovn1"   
+
+- name: "Setup OVN on hosts to connect to OVN Centeral node" 
+  template:
+    src: "setup_ovn.sh.j2" 
+    dest: "/home/vagrant/setup.sh" 
+    owner: "vagrant" 
+    group: "vagrant" 
+    mode: "0755" 
+  when: > 
+     ansible_hostname == "ovn2" or 
+     ansible_hostname == "ovn3" 
+
+
+- name: "Clean up ovn2" 
+  template: 
+    src: "cleanup_ovn2.sh.j2" 
+    dest: "/home/vagrant/setup.sh" 
+    owner: "vagrant" 
+    group: "vagrant" 
+    mode: "0755" 
+  when: > 
+    ansible_hostname == "ovn2" 
+
+- name: "Clean up ovn3"
+  template:
+  src: "cleanup_ovn3.sh.j2"
+    dest: "/home/vagrant/setup.sh"
+    owner: "vagrant"
+    group: "vagrant"
+    mode: "0755"
+  when: >
+    ansible_hostname == "ovn3"
+
+
+

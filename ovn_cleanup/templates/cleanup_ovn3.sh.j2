@@ -1,0 +1,10 @@
+#!/bin/bash 
+
+# delete vm2 and vm3
+ip netns del vm2
+ovs-vsctl --if-exists --with-iface del-port br-int vm2
+
+ip netns del vm3
+ovs-vsctl --if-exists --with-iface del-port br-int vm3
+
+

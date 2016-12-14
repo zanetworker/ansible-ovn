@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# delete vm1
+ip netns del vm1
+ovs-vsctl --if-exists --with-iface del-port br-int vm1
